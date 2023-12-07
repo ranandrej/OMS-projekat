@@ -10,6 +10,7 @@ namespace OMS_Projekat
     {
         static void Main(string[] args)
         {
+            Console.WriteLine("Pozdrav frende!");
         }
     }
 }

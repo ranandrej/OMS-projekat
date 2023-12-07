@@ -1,0 +1,7 @@
+C:\Users\Korisnik\OMS-projekat\OMS-Projekat\OMS-Projekat\bin\Debug\OMS-Projekat.exe.config
+C:\Users\Korisnik\OMS-projekat\OMS-Projekat\OMS-Projekat\bin\Debug\OMS-Projekat.exe
+C:\Users\Korisnik\OMS-projekat\OMS-Projekat\OMS-Projekat\bin\Debug\OMS-Projekat.pdb
+C:\Users\Korisnik\OMS-projekat\OMS-Projekat\OMS-Projekat\obj\Debug\OMS-Projekat.csproj.AssemblyReference.cache
+C:\Users\Korisnik\OMS-projekat\OMS-Projekat\OMS-Projekat\obj\Debug\OMS-Projekat.csproj.CoreCompileInputs.cache
+C:\Users\Korisnik\OMS-projekat\OMS-Projekat\OMS-Projekat\obj\Debug\OMS-Projekat.exe
+C:\Users\Korisnik\OMS-projekat\OMS-Projekat\OMS-Projekat\obj\Debug\OMS-Projekat.pdb
