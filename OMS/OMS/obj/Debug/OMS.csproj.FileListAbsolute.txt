@@ -1,0 +1,16 @@
+C:\Users\Korisnik\source\repos\OMS\OMS\bin\Debug\OMS.exe.config
+C:\Users\Korisnik\source\repos\OMS\OMS\bin\Debug\OMS.exe
+C:\Users\Korisnik\source\repos\OMS\OMS\bin\Debug\OMS.pdb
+C:\Users\Korisnik\source\repos\OMS\OMS\bin\Debug\EntityFramework.dll
+C:\Users\Korisnik\source\repos\OMS\OMS\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Korisnik\source\repos\OMS\OMS\bin\Debug\System.Data.SQLite.dll
+C:\Users\Korisnik\source\repos\OMS\OMS\bin\Debug\System.Data.SQLite.EF6.dll
+C:\Users\Korisnik\source\repos\OMS\OMS\bin\Debug\System.Data.SQLite.Linq.dll
+C:\Users\Korisnik\source\repos\OMS\OMS\bin\Debug\EntityFramework.xml
+C:\Users\Korisnik\source\repos\OMS\OMS\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Korisnik\source\repos\OMS\OMS\bin\Debug\System.Data.SQLite.xml
+C:\Users\Korisnik\source\repos\OMS\OMS\obj\Debug\OMS.csproj.AssemblyReference.cache
+C:\Users\Korisnik\source\repos\OMS\OMS\obj\Debug\OMS.csproj.CoreCompileInputs.cache
+C:\Users\Korisnik\source\repos\OMS\OMS\obj\Debug\OMS.csproj.CopyComplete
+C:\Users\Korisnik\source\repos\OMS\OMS\obj\Debug\OMS.exe
+C:\Users\Korisnik\source\repos\OMS\OMS\obj\Debug\OMS.pdb
