@@ -11,7 +11,7 @@ namespace OMS
 {
     class Program
     {
-        //Pozivanje Metoda
+        //Pozivanje Metoda za Kvar klasu
         static void Main(string[] args)
         {
             KvarDAO kvarDAO = new KvarDAO();
