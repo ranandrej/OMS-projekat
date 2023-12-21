@@ -62,8 +62,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DAO\ElektricniElementiDAO.cs" />
     <Compile Include="DAO\KvarDAO.cs" />
     <Compile Include="Data\DataBase.cs" />
+    <Compile Include="ElektricniElementi.cs" />
+    <Compile Include="Ispis\ElektricniElementiIspis.cs" />
     <Compile Include="Ispis\KvarIspis.cs" />
     <Compile Include="Kvar.cs" />
     <Compile Include="Program.cs" />
