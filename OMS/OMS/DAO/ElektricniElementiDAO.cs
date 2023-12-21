@@ -56,7 +56,7 @@ namespace OMS.DAO
             command.Parameters.AddWithValue("@TipEl", ee.TipEl);
             command.Parameters.AddWithValue("@GeoLokEl", ee.GeoLokEl);
             command.Parameters.AddWithValue("@NapNivoEl", ee.NapNivoEl);
-            command.Parameters.AddWithValue("@IDKV", "20020109103025_22");
+            command.Parameters.AddWithValue("@IDKV", "20020109103025_22");//zbog kljuca smo postavili bilo sta
             db.OpenConnection();
 
             if (command.ExecuteNonQuery() > 0)
