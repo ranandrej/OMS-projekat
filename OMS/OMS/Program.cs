@@ -16,16 +16,20 @@ namespace OMS
         {
             KvarDAO kvarDAO = new KvarDAO();
             KvarIspis kvisp = new KvarIspis();
-            string answer;
-            
+
+            string answer="";
+            while (answer != "6")
+            {
+                
                 Console.WriteLine("Izaberite opciju:");
                 Console.WriteLine("1-Unos Kvara");
                 Console.WriteLine("2-Prikaz svih");
                 Console.WriteLine("5-Kvarovi i akcije");
-                
+                Console.WriteLine("6-Izlaz");
+
                 answer = Console.ReadLine();
-            
-           
+
+
                 switch (answer)
                 {
                     case "1":
@@ -35,10 +39,11 @@ namespace OMS
                         kvisp.IspisiKvarove();
                         break;
                     case "5":
-                    kvisp.KvarAkcija();
-                    break;
+                        kvisp.KvarAkcija();
+                        break;
 
                 }
+            }
             
         }
     }
