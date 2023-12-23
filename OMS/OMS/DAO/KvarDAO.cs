@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OMS.Data;
+using OMS.Klase;
 using System.Data.SQLite;
 namespace OMS.DAO
 {
@@ -24,7 +25,7 @@ namespace OMS.DAO
             SQLiteDataReader reader = command.ExecuteReader();
             while (reader.Read())
             {
-                Kvar k = new Kvar(reader.GetString(0), reader.GetString(1), reader.GetString(2));
+                Kvar k = new Kvar(reader.GetString(0), reader.GetString(1), reader.GetString(2),reader.GetString(3),reader.GetString(4));
                 kvarovi.Add(k);
             }
             db.CloseConnection();
@@ -40,13 +41,43 @@ namespace OMS.DAO
             k.VrKv = Console.ReadLine();
             Console.WriteLine("Unesite status kvara:");
             k.statusKv = Console.ReadLine();
-
+            Console.WriteLine("Kratak opis kvara (do 20 karaktera):");
+            k.opis = Console.ReadLine();
+            Console.WriteLine("Pun opis kvara:");
+            k.opisPun = Console.ReadLine();
+            Console.WriteLine("Unesite broj akcija:");
+            int n = Convert.ToInt32(Console.ReadLine());
             DataBase db = new DataBase();
-            string query = "insert into OMS values(@idk,@vrkv,@status)";//Tabela OMS sadrzi informacije o kvarovima
+            for (int i=0;i<n;i++)
+            {
+                Akcija a = new Akcija();
+
+                a.IdKv_kv = k.IdKv;
+                Console.WriteLine("Vreme akcije (dan/mesec/godina-sat)");
+                a.VrAk = Console.ReadLine();
+                Console.WriteLine("Opis akcije:");
+                a.opis = Console.ReadLine();
+                string sql = "insert into Akcije values(@idk,@vrak,@opis)";
+                SQLiteCommand komanda = new SQLiteCommand(sql, db.connection);//Kreiranje SQL komande
+                komanda.Parameters.AddWithValue("@idk", a.IdKv_kv);//Postavljanje vrednosti parametara
+                komanda.Parameters.AddWithValue("@vrak", a.VrAk);
+                komanda.Parameters.AddWithValue("@opis", a.opis);
+                db.OpenConnection();
+
+                if (komanda.ExecuteNonQuery() > 0)
+                {//Ako je promena uspesna ispisi
+                    Console.WriteLine("Akcija uspesno dodat.");
+                };
+            }
+ 
+           
+            string query = "insert into OMS values(@idk,@vrkv,@status,@opis,@opisPun)";//Tabela OMS sadrzi informacije o kvarovima
             SQLiteCommand command = new SQLiteCommand(query, db.connection);//Kreiranje SQL komande
             command.Parameters.AddWithValue("@idk", k.IdKv);//Postavljanje vrednosti parametara
             command.Parameters.AddWithValue("@vrkv", k.VrKv);
             command.Parameters.AddWithValue("@status", k.statusKv);
+            command.Parameters.AddWithValue("@opis", k.opis);
+            command.Parameters.AddWithValue("@opisPun", k.opisPun);
             db.OpenConnection();
 
             if (command.ExecuteNonQuery() > 0) {//Ako je promena uspesna ispisi

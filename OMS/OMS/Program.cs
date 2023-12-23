@@ -11,7 +11,7 @@ namespace OMS
 {
     class Program
     {
-        //Pozivanje Metoda
+        //Pozivanje Metoda za Kvar klasu
         static void Main(string[] args)
         {
             KvarDAO kvarDAO = new KvarDAO();
@@ -21,7 +21,7 @@ namespace OMS
                 Console.WriteLine("Izaberite opciju:");
                 Console.WriteLine("1-Unos Kvara");
                 Console.WriteLine("2-Prikaz svih");
-                Console.WriteLine("3-Izlaz");
+                Console.WriteLine("5-Kvarovi i akcije");
                 
                 answer = Console.ReadLine();
             
@@ -34,8 +34,10 @@ namespace OMS
                     case "2":
                         kvisp.IspisiKvarove();
                         break;
-                    case "3":
-                        break;
+                    case "5":
+                    kvisp.KvarAkcija();
+                    break;
+
                 }
             
         }
