@@ -63,11 +63,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DAO\AkcijeDAO.cs" />
+    <Compile Include="DAO\ElektricniElementiDAO.cs" />
     <Compile Include="DAO\KvarDAO.cs" />
     <Compile Include="Data\DataBase.cs" />
     <Compile Include="DTO\KvarAkcijaDTO.cs" />
+    <Compile Include="Ispis\ElektricniElementiIspis.cs" />
     <Compile Include="Ispis\KvarIspis.cs" />
     <Compile Include="Klase\Akcija.cs" />
+    <Compile Include="Klase\ElektricniElementi.cs" />
     <Compile Include="Klase\Kvar.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

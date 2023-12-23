@@ -17,13 +17,22 @@ namespace OMS
             KvarDAO kvarDAO = new KvarDAO();
             KvarIspis kvisp = new KvarIspis();
 
+
             string answer="";
             while (answer != "6")
             {
                 
+
+            ElektricniElementiDAO elementiDao = new ElektricniElementiDAO();
+            ElektricniElementiIspis eeisp = new ElektricniElementiIspis();
+            
+            
+
                 Console.WriteLine("Izaberite opciju:");
                 Console.WriteLine("1-Unos Kvara");
                 Console.WriteLine("2-Prikaz svih");
+                Console.WriteLine("3-Unos elektricnog elementa");
+                Console.WriteLine("4-Prikaz svih elektricnih elemenata");
                 Console.WriteLine("5-Kvarovi i akcije");
                 Console.WriteLine("6-Izlaz");
 
@@ -38,9 +47,20 @@ namespace OMS
                     case "2":
                         kvisp.IspisiKvarove();
                         break;
+
                     case "5":
                         kvisp.KvarAkcija();
                         break;
+
+                    case "3":
+                    elementiDao.UnesiElektricniElement();
+                        break;
+                     case "4":
+                    eeisp.IspisiElemente();
+                        break;
+                    
+
+                        
 
                 }
             }
