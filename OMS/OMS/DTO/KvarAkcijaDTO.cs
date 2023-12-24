@@ -10,5 +10,7 @@ namespace OMS.DTO
     {
         public Kvar k { get; set; }
         public List<Akcija> akcije { get; set; }
+
+        public ElektricniElementi el { get; set; }
     }
 }

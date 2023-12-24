@@ -14,7 +14,7 @@ namespace OMS
         public string TipEl;
         public string GeoLokEl;
         public string NapNivoEl;
-
+      
 
 
         public ElektricniElementi(int idEl, string nazivEl, string tipEl, string geolokEl, string napnivoEl)
@@ -24,7 +24,7 @@ namespace OMS
             TipEl = tipEl;
             GeoLokEl = geolokEl;
             NapNivoEl = napnivoEl;
-
+         
         }
 
         public ElektricniElementi()

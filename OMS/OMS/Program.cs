@@ -16,25 +16,26 @@ namespace OMS
         {
             KvarDAO kvarDAO = new KvarDAO();
             KvarIspis kvisp = new KvarIspis();
+            ElektricniElementiDAO elementiDao = new ElektricniElementiDAO();
+            ElektricniElementiIspis eeisp = new ElektricniElementiIspis();
 
-
-            string answer="";
+            string answer = "";
             while (answer != "6")
             {
                 
 
-            ElektricniElementiDAO elementiDao = new ElektricniElementiDAO();
-            ElektricniElementiIspis eeisp = new ElektricniElementiIspis();
+            
             
             
 
                 Console.WriteLine("Izaberite opciju:");
                 Console.WriteLine("1-Unos Kvara");
-                Console.WriteLine("2-Prikaz svih");
+                Console.WriteLine("2-Prikaz Kvarova (Osnovne info)");
                 Console.WriteLine("3-Unos elektricnog elementa");
                 Console.WriteLine("4-Prikaz svih elektricnih elemenata");
-                Console.WriteLine("5-Kvarovi i akcije");
+                Console.WriteLine("5-Svi Kvarovi (Detaljniji opis svakog)");
                 Console.WriteLine("6-Izlaz");
+                
 
                 answer = Console.ReadLine();
 
@@ -45,19 +46,21 @@ namespace OMS
                         kvarDAO.UnesiKvar();
                         break;
                     case "2":
+                        kvisp.KvarAkcija();
+                        break;
+                    case "3":
+                        elementiDao.UnesiElektricniElement();
+
+                        break;
+                    case "4":
+                        eeisp.IspisiElemente();
+                        break;
+                    case "5":
                         kvisp.IspisiKvarove();
                         break;
 
-                    case "5":
-                        kvisp.KvarAkcija();
-                        break;
-
-                    case "3":
-                    elementiDao.UnesiElektricniElement();
-                        break;
-                     case "4":
-                    eeisp.IspisiElemente();
-                        break;
+                    
+                     
                     
 
                         
