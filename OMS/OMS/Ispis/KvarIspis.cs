@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using OMS.DAO;
 using OMS.Klase;
+using OMS.Services;
+using OMS.DTO;
 namespace OMS.Ispis
 {
     //Klasa za ispis informacija
@@ -12,32 +14,37 @@ namespace OMS.Ispis
     {
         public static KvarDAO kvarDAO = new KvarDAO();
         public static AkcijeDAO akcijaDAO = new AkcijeDAO();
-
+        public static KvarAllInfo kvarService = new KvarAllInfo();//klasa za kompleksni upit - Svi kvarovi sa akcijama i elementima.
         public void IspisiKvarove()
         {
             Console.WriteLine("--------------SVI KVAROVI--------------");
-            Console.WriteLine("{0,-25}{1,-20}{2,-15}","IDKVAR","VREME_KV","STATUS");
-            foreach(Kvar k in kvarDAO.FindKvarovi())//Svi kvarovi u tabeli
+            
+            foreach (KvarAkcijaDTO dto in kvarService.KvarElAkcije())
             {
-                Console.WriteLine("{0,-25}{1,-20}{2,-15}", k.IdKv, k.VrKv, k.statusKv);
+                Console.WriteLine("-----------KVAR-------------------------------------------------------------------------");
+                Console.WriteLine("{0,-25}{1,-20}{2,-15}", "IDKVAR", "VREME_KV", "STATUS");
+                Console.WriteLine("{0,-25}{1,-20}{2,-15}\n\n", dto.k.IdKv, dto.k.VrKv, dto.k.statusKv);
+                Console.WriteLine("ELEMENT---"+dto.el.NazivEl+"\t"+dto.el.NapNivoEl+"\n\n");
+                Console.WriteLine("PREDUZETE AKCIJE-----");
+                Console.WriteLine("{0,-25}{1,-35}","VREMEAK","OPIS");
+                foreach(Akcija a in dto.akcije)
+                {
+                    
+                    Console.WriteLine("{0,-25}{1,-35}", a.VrAk, a.opis);
+                }
+                Console.WriteLine("-------------------------------------------------------------------------------------------\n\n");
             }
             Console.WriteLine("------------------------------------------");
         }
         public void KvarAkcija()
         {
-            Console.WriteLine("--------------Kvarovi sa akcijama--------------");
-            foreach(Kvar k in kvarDAO.FindKvarovi())
+            Console.WriteLine("-------------SVI KVAROVI---------------");
+            Console.WriteLine("{0,-25}{1,-20}{2,-15}{3,-30}{4,-10}", "IDKV", "VRKV", "STATUS", "Kratak opis","Broj Akcija");
+            foreach( KvarAkcijaDTO dto in kvarService.KvarElAkcije())
             {
-                Console.WriteLine("-----------KVAR----------");
-                Console.WriteLine("ID kvara:" + k.IdKv+ " Kratak Opis:" + k.opis + " Vreme kvara:" + k.VrKv);
-                Console.WriteLine("----------PREDUZETE AKCIJE-------");
-                foreach(Akcija a in akcijaDAO.FindAkcijeByKvar(k.IdKv))
-                {
-                    Console.WriteLine("VREME AKCIJE:" + a.VrAk);
-                    Console.WriteLine("OPIS AKCIJE:" + a.opis);
-                }
-                Console.WriteLine("-------------------------------------");
+                Console.WriteLine("{0,-25}{1,-20}{2,-15}{3,-30}{4,-10}", dto.k.IdKv, dto.k.VrKv, dto.k.statusKv, dto.k.opis, dto.akcije.Count());
             }
+            Console.WriteLine("------------------------------------------");
 
         }
     }

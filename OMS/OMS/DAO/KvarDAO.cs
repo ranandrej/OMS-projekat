@@ -25,7 +25,7 @@ namespace OMS.DAO
             SQLiteDataReader reader = command.ExecuteReader();
             while (reader.Read())
             {
-                Kvar k = new Kvar(reader.GetString(0), reader.GetString(1), reader.GetString(2),reader.GetString(3),reader.GetString(4));
+                Kvar k = new Kvar(reader.GetString(0), reader.GetString(1), reader.GetString(2),reader.GetString(3),reader.GetString(4),reader.GetInt32(5));
                 kvarovi.Add(k);
             }
             db.CloseConnection();
@@ -44,7 +44,11 @@ namespace OMS.DAO
             Console.WriteLine("Kratak opis kvara (do 20 karaktera):");
             k.opis = Console.ReadLine();
             Console.WriteLine("Pun opis kvara:");
+           
+
             k.opisPun = Console.ReadLine();
+            Console.WriteLine("Unesite id elementa na kom se desio kvar:");
+            k.IdEl = Convert.ToInt32(Console.ReadLine());
             Console.WriteLine("Unesite broj akcija:");
             int n = Convert.ToInt32(Console.ReadLine());
             DataBase db = new DataBase();
@@ -71,13 +75,14 @@ namespace OMS.DAO
             }
  
            
-            string query = "insert into OMS values(@idk,@vrkv,@status,@opis,@opisPun)";//Tabela OMS sadrzi informacije o kvarovima
+            string query = "insert into OMS values(@idk,@vrkv,@status,@opis,@opisPun,@idel)";//Tabela OMS sadrzi informacije o kvarovima
             SQLiteCommand command = new SQLiteCommand(query, db.connection);//Kreiranje SQL komande
             command.Parameters.AddWithValue("@idk", k.IdKv);//Postavljanje vrednosti parametara
             command.Parameters.AddWithValue("@vrkv", k.VrKv);
             command.Parameters.AddWithValue("@status", k.statusKv);
             command.Parameters.AddWithValue("@opis", k.opis);
             command.Parameters.AddWithValue("@opisPun", k.opisPun);
+            command.Parameters.AddWithValue("@idel", k.IdEl);
             db.OpenConnection();
 
             if (command.ExecuteNonQuery() > 0) {//Ako je promena uspesna ispisi
