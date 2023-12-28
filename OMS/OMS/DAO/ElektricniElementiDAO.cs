@@ -73,8 +73,12 @@ namespace OMS.DAO
             command.Parameters.AddWithValue("@NazivEl", ee.NazivEl);
             command.Parameters.AddWithValue("@TipEl", ee.TipEl);
             command.Parameters.AddWithValue("@GeoLokEl", ee.GeoLokEl);
+            if (string.IsNullOrEmpty(ee.NapNivoEl))
+            {
+                ee.NapNivoEl = "SrednjiNapon";
+            }
             command.Parameters.AddWithValue("@NapNivoEl", ee.NapNivoEl);
-           
+
             db.OpenConnection();
 
             if (command.ExecuteNonQuery() > 0)
