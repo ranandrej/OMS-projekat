@@ -31,16 +31,43 @@ namespace OMS.DAO
             db.CloseConnection();
             return kvarovi;
         }
+        public int brKvarZaDatum(DateTime dt)
+        {
+            string formattedDate = dt.ToShortDateString();
+
+            // Kreiranje SQL upita
+            string query = "SELECT COUNT(*) FROM OMS WHERE vrkv = @CurrentDate";
+
+
+            DataBase db = new DataBase();
+            SQLiteCommand komanda = new SQLiteCommand(query, db.connection);
+            db.OpenConnection();
+            komanda.Parameters.AddWithValue("@CurrentDate", formattedDate);
+
+            int num = Convert.ToInt32(komanda.ExecuteScalar());
+            db.CloseConnection();
+            Console.WriteLine("Ukupno kvarova danas:" + num);
+            return num;
+        }
         public void UnesiKvar()
         {
             Kvar k = new Kvar();
 
-            Console.WriteLine("Unesite id kvara:");
-            k.IdKv = Console.ReadLine();
-            Console.WriteLine("Unesite vreme:");
-            k.VrKv = Console.ReadLine();
-            Console.WriteLine("Unesite status kvara:");
-            k.statusKv = Console.ReadLine();
+            DateTime trenutno = DateTime.Now;
+            int rb = brKvarZaDatum(trenutno);
+            if (rb <= 9)
+            {
+                k.IdKv = trenutno.ToString("yyyyMMddhhmmss") + "_0" + (rb + 1);
+            }
+            else
+            {
+                k.IdKv = trenutno.ToString("yyyyMMddhhmmss") + "_" + (rb + 1);
+            }
+            
+
+            k.VrKv = trenutno.ToShortDateString();
+
+            
             Console.WriteLine("Kratak opis kvara (do 20 karaktera):");
             k.opis = Console.ReadLine();
             Console.WriteLine("Pun opis kvara:");
@@ -51,27 +78,38 @@ namespace OMS.DAO
             k.IdEl = Convert.ToInt32(Console.ReadLine());
             Console.WriteLine("Unesite broj akcija:");
             int n = Convert.ToInt32(Console.ReadLine());
-            DataBase db = new DataBase();
-            for (int i=0;i<n;i++)
+            if (n >= 2)
             {
-                Akcija a = new Akcija();
+                k.statusKv = "U popravci";
+            }
+            else
+            {
+                k.statusKv = "Nepotvrdjen";
+            }
+            DataBase db = new DataBase();
+            if (n > 0)
+            {
+                for (int i = 0; i < n; i++)
+                {
+                    Akcija a = new Akcija();
 
-                a.IdKv_kv = k.IdKv;
-                Console.WriteLine("Vreme akcije (dan/mesec/godina-sat)");
-                a.VrAk = Console.ReadLine();
-                Console.WriteLine("Opis akcije:");
-                a.opis = Console.ReadLine();
-                string sql = "insert into Akcije values(@idk,@vrak,@opis)";
-                SQLiteCommand komanda = new SQLiteCommand(sql, db.connection);//Kreiranje SQL komande
-                komanda.Parameters.AddWithValue("@idk", a.IdKv_kv);//Postavljanje vrednosti parametara
-                komanda.Parameters.AddWithValue("@vrak", a.VrAk);
-                komanda.Parameters.AddWithValue("@opis", a.opis);
-                db.OpenConnection();
+                    a.IdKv_kv = k.IdKv;
+                    Console.WriteLine("Vreme akcije (dan/mesec/godina-sat)");
+                    a.VrAk = Console.ReadLine();
+                    Console.WriteLine("Opis akcije:");
+                    a.opis = Console.ReadLine();
+                    string sql = "insert into Akcije values(@idk,@vrak,@opis)";
+                    SQLiteCommand komanda = new SQLiteCommand(sql, db.connection);//Kreiranje SQL komande
+                    komanda.Parameters.AddWithValue("@idk", a.IdKv_kv);//Postavljanje vrednosti parametara
+                    komanda.Parameters.AddWithValue("@vrak", a.VrAk);
+                    komanda.Parameters.AddWithValue("@opis", a.opis);
+                    db.OpenConnection();
 
-                if (komanda.ExecuteNonQuery() > 0)
-                {//Ako je promena uspesna ispisi
-                    Console.WriteLine("Akcija uspesno dodat.");
-                };
+                    if (komanda.ExecuteNonQuery() > 0)
+                    {//Ako je promena uspesna ispisi
+                        Console.WriteLine("Akcija uspesno dodata.");
+                    };
+                }
             }
  
            
