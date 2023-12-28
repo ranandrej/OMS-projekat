@@ -20,7 +20,7 @@ namespace OMS
             ElektricniElementiIspis eeisp = new ElektricniElementiIspis();
 
             string answer = "";
-            while (answer != "6")
+            while (answer != "7")
             {
                 
 
@@ -34,7 +34,8 @@ namespace OMS
                 Console.WriteLine("3-Unos elektricnog elementa");
                 Console.WriteLine("4-Prikaz svih elektricnih elemenata");
                 Console.WriteLine("5-Svi Kvarovi (Detaljniji opis svakog)");
-                Console.WriteLine("6-Izlaz");
+                Console.WriteLine("6-Azuriranje Kvara (Detaljniji opis svakog)");
+                Console.WriteLine("7-Izlaz");
                 
 
                 answer = Console.ReadLine();
@@ -58,12 +59,15 @@ namespace OMS
                     case "5":
                         kvisp.IspisiKvarove();
                         break;
+                    case "6":
+                        kvisp.Azuriranje();
+                        break;
 
-                    
-                     
-                    
 
-                        
+
+
+
+
 
                 }
             }

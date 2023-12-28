@@ -9,16 +9,16 @@ using OMS.DTO;
 namespace OMS.Services
 {
 
-public class KvarAllInfo
+    public class KvarAllInfo
     {
-        
-        public KvarDAO kvarDAO= new KvarDAO();
+
+        public KvarDAO kvarDAO = new KvarDAO();
         public AkcijeDAO akcijeDAO = new AkcijeDAO();
         public ElektricniElementiDAO elDAO = new ElektricniElementiDAO();
-        public List<KvarAkcijaDTO>KvarElAkcije()
+        public List<KvarAkcijaDTO> KvarElAkcije()
         {
             List<KvarAkcijaDTO> dtos = new List<KvarAkcijaDTO>();//DTO klasa sadrzi kvar sa njegovim elementom i listom akcija koje su izvrsene nad istim
-            foreach(Kvar k in kvarDAO.FindKvarovi())
+            foreach (Kvar k in kvarDAO.FindKvarovi())
             {
                 KvarAkcijaDTO dto = new KvarAkcijaDTO();
                 dto.k = k;
@@ -27,6 +27,12 @@ public class KvarAllInfo
                 dtos.Add(dto);
             }
             return dtos;
+        }
+        public void AzurirajKvar()
+        {
+            Console.WriteLine("Unesite id kvara koji hocete da azurirate:");
+            string id = Console.ReadLine();
+            kvarDAO.AzurirajKvarove(id);
         }
     }
 }
