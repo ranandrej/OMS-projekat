@@ -34,5 +34,10 @@ namespace OMS.Services
             string id = Console.ReadLine();
             kvarDAO.AzurirajKvarove(id);
         }
+
+       
+    
+
+        
     }
 }

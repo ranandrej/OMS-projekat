@@ -53,6 +53,46 @@ namespace OMS.Ispis
             kvarService.AzurirajKvar();
         }
 
-   
+
+        public void IspisiJedanKvarPoId()
+        {
+            bool pronadjen = false;
+
+            Console.WriteLine("Unesite ID kvara koji želite prikazati: ");
+            string unetiId = Console.ReadLine();
+
+            Console.WriteLine("--------------POJEDINAČNI KVAR--------------");
+
+            foreach (KvarAkcijaDTO dto in kvarService.KvarElAkcije())
+            {
+                if (dto.k.IdKv == unetiId)
+                {
+                    pronadjen = true;
+
+                    Console.WriteLine("------------------KVAR---------------------");
+                    Console.WriteLine("{0,-25}{1,-20}{2,-15}", "IDKVAR", "VREME_KV", "STATUS");
+                    Console.WriteLine("{0,-25}{1,-20}{2,-15}\n\n", dto.k.IdKv, dto.k.VrKv, dto.k.statusKv);
+                    Console.WriteLine("ELEMENT---" + dto.el.NazivEl + "\t" + dto.el.NapNivoEl + "\n\n");
+                    Console.WriteLine("PREDUZETE AKCIJE-----");
+                    Console.WriteLine("{0,-25}{1,-35}", "VREMEAK", "OPIS");
+                    foreach (Akcija a in dto.akcije)
+                    {
+                        Console.WriteLine("{0,-25}{1,-35}", a.VrAk, a.opis);
+                    }
+                    Console.WriteLine("-------------------------------------------------------------------------------------------\n\n");
+
+                    break; // Prekidamo petlju nakon što pronađemo traženi kvar
+                }
+            }
+
+            if (!pronadjen)
+            {
+                Console.WriteLine("Kvar sa unetim ID-om nije pronađen.");
+            }
+
+            Console.WriteLine("------------------------------------------");
+        }
+
+
     }
 }
