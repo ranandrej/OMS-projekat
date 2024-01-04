@@ -28,5 +28,11 @@ public class KvarAllInfo
             }
             return dtos;
         }
+        public void AzurirajKvar()
+        {
+            Console.WriteLine("Unesite id kvara koji hocete da azurirate:");
+            string id = Console.ReadLine();
+            kvarDAO.AzurirajKvarove(id);
+        }
     }
 }
