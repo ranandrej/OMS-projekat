@@ -20,7 +20,7 @@ namespace OMS
             ElektricniElementiIspis eeisp = new ElektricniElementiIspis();
 
             string answer = "";
-            while (answer != "8")
+            while (answer != "10")
             {
                 
 
@@ -36,8 +36,8 @@ namespace OMS
                 Console.WriteLine("5-Svi Kvarovi (Detaljniji opis svakog)");
                 Console.WriteLine("6-Azuriranje Kvara (Detaljniji opis svakog)");
                 Console.WriteLine("7-Ispis podataka o kvaru po ID-u");
-                Console.WriteLine("8-Izlaz");
-                
+                Console.WriteLine("8-Kvarovi u datom vremenskom opsegu");
+
 
                 answer = Console.ReadLine();
 
@@ -66,6 +66,7 @@ namespace OMS
                     case "7":
                         kvisp.IspisiJedanKvarPoId();
                         break;
+                    
 
 
 

@@ -92,39 +92,6 @@ namespace OMS.DAO
         }
 
 
-        /*  public List<Kvar> KvaroviUOpsegu()
-          {
-              List<Kvar> kvarovi = new List<Kvar>();
-              DataBase db = new DataBase();//Nova instance klase DataBase zbog konekcije
-
-              Console.Write("Unesite početni datum (DD/MM/YYYY): ");
-              DateTime pocetniDatum = DateTime.Parse(Console.ReadLine());
-
-              Console.Write("Unesite završni datum (DD/MM/YYYY): ");
-              DateTime zavrsniDatum = DateTime.Parse(Console.ReadLine());
-
-              string query = "select * from OMS where VrKv between @pocetniDatum and @zavrsniDatum";
-              SQLiteCommand command = db.connection.CreateCommand();
-              command.CommandText = query;
-              db.OpenConnection();
-              SQLiteDataReader reader = command.ExecuteReader();
-              Console.WriteLine("Lista kvarova u zadatom vremenskom opsegu:");
-              while (reader.Read())
-              {
-                  Kvar k = new Kvar(reader.GetString(0), reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetString(4), reader.GetInt32(5));
-                  kvarovi.Add(k);
-              }
-              db.CloseConnection();
-              return kvarovi;
-
-
-
-          } */
-
-   
-
-
-
         public void AzurirajKvarove(string id)
         {
             Kvar kvar = new Kvar();
