@@ -41,8 +41,15 @@ public class KvarAllInfo
             dto.k = k;
             dto.akcije = akcijeDAO.FindAkcijeByKvar(k.IdKv);
             dto.el = elDAO.FindByIdEl(k.IdEl);
-            double p = kvarDAO.IzracunajPrioritetZaDane(k.IdKv) + (dto.akcije.Count() * 0.5);
-            dto.prioritet = p;
+            if (String.Compare(k.statusKv, "U popravci")==0)
+            {
+                double p = kvarDAO.IzracunajPrioritetZaDane(k.IdKv) + (dto.akcije.Count() * 0.5);
+                dto.prioritet = p;
+            }
+            else
+            {
+                dto.prioritet = 0;
+            }
             return dto;
 
 
