@@ -34,5 +34,18 @@ public class KvarAllInfo
             string id = Console.ReadLine();
             kvarDAO.AzurirajKvarove(id);
         }
+        public KvarPrioritetDTO kvarSaPrioritetom(string id)
+        {
+            KvarPrioritetDTO dto = new KvarPrioritetDTO();
+            Kvar k = kvarDAO.PrikazPoId(id);
+            dto.k = k;
+            dto.akcije = akcijeDAO.FindAkcijeByKvar(k.IdKv);
+            dto.el = elDAO.FindByIdEl(k.IdEl);
+            double p = kvarDAO.IzracunajPrioritetZaDane(k.IdKv) + (dto.akcije.Count() * 0.5);
+            dto.prioritet = p;
+            return dto;
+
+
+        }
     }
 }

@@ -142,6 +142,7 @@
     <Compile Include="DAO\KvarDAO.cs" />
     <Compile Include="Data\DataBase.cs" />
     <Compile Include="DTO\KvarAkcijaDTO.cs" />
+    <Compile Include="DTO\KvarPrioritetDTO.cs" />
     <Compile Include="Ispis\ElektricniElementiIspis.cs" />
     <Compile Include="Ispis\KvarIspis.cs" />
     <Compile Include="Klase\Akcija.cs" />

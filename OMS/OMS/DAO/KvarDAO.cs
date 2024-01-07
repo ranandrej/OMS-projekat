@@ -159,7 +159,7 @@ namespace OMS.DAO
 
 
 
-        public Kvar PrikazPoId(int id)
+        public Kvar PrikazPoId(string id)
         {
             Kvar kvar = new Kvar();
             DataBase db = new DataBase();
@@ -171,7 +171,7 @@ namespace OMS.DAO
             SQLiteDataReader reader = command.ExecuteReader();
             while (reader.Read())
             {
-                Kvar k = new Kvar(reader.GetString(0), reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetString(4), reader.GetInt32(5));
+                kvar = new Kvar(reader.GetString(0), reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetString(4), reader.GetInt32(5));
             }
             return kvar;
         }
@@ -316,6 +316,17 @@ namespace OMS.DAO
             }
             Woorkbook.SaveAs("oms.xlsx");
             Console.WriteLine("Excel file exported successfully.");
+        }
+        public double IzracunajPrioritetZaDane(string id)
+        {
+            double prioritet = 0;
+            Kvar k = PrikazPoId(id);
+            DateTime datumKv = DateTime.ParseExact(k.VrKv, "yyyy-MM-dd",null);
+            int brDana = (DateTime.Now - datumKv).Days;
+            prioritet += brDana;
+            return prioritet;
+
+
         }
     }
 

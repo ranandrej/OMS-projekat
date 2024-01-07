@@ -61,5 +61,18 @@ namespace OMS.Ispis
         {
             kvarService.AzurirajKvar();
         }
+        public void IspisKvarPrioritet()
+        {
+            Console.WriteLine("Unesite id zeljenog kvara:");
+            string id = Console.ReadLine();
+            KvarPrioritetDTO dto = kvarService.kvarSaPrioritetom(id);
+            Console.WriteLine("----------------KVAR---------------");
+            Console.WriteLine("IDKV:" + dto.k.IdKv +"\tOPIS:" + dto.k.opis +"\tELEMENT:" + dto.el.NazivEl+"\tPRIORITET:" + dto.prioritet);
+            foreach(Akcija a in dto.akcije)
+            {
+                Console.WriteLine("----------------------------------------------");
+                Console.WriteLine("OPIS AKCIJE:" + a.opis + "VREME:" + a.VrAk);
+            }
+        }
     }
 }

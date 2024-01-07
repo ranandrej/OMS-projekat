@@ -38,6 +38,7 @@ namespace OMS
                 Console.WriteLine("7-Azuriranje odredjenog kvara");
                 Console.WriteLine("8-Izlaz");
                 Console.WriteLine("9-Sacuvaj kvarove u excel");
+                Console.WriteLine("10-Pojedinacan kvar sa prioritetom");
                 
 
                 answer = Console.ReadLine();
@@ -69,6 +70,9 @@ namespace OMS
                         break;
                     case "9":
                         kvarDAO.SaveExcel();
+                        break;
+                    case "10":
+                        kvisp.IspisKvarPrioritet();
                         break;
 
                     
