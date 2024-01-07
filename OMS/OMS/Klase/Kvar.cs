@@ -14,6 +14,7 @@ namespace OMS
         public string opis;
         public string opisPun;
         public int IdEl;
+        public double prioritet;
 
         public Kvar(string idKv, string vrKv, string statusKv,string opis,string opis_pun,int idEl)
         {
@@ -24,6 +25,7 @@ namespace OMS
             this.opis = opis;
             this.opisPun = opis_pun;
             this.IdEl=idEl;
+            
         }
 
         public Kvar()

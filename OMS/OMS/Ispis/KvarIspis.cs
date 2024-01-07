@@ -48,10 +48,23 @@ namespace OMS.Ispis
             Console.WriteLine("------------------------------------------");
 
         }
+
+        public void IspisiOpseg()
+        {
+            List<Kvar> kvaroviOps = kvarDAO.KvaroviUOpsegu();
+            Console.WriteLine("--------------KVAROVI U UNETOM OPSEGU-----------------");
+            Console.WriteLine("{0,-25}{1,-20}{2,-15}{3,-30}", "IDKV", "VRKV", "STATUS", "Kratak opis");
+            foreach (Kvar k in kvaroviOps)
+            {
+                Console.WriteLine("{0,-25}{1,-20}{2,-15}{3,-30}",k.IdKv,k.VrKv,k.statusKv,k.opis);
+            }
+        }
+
         public void Azuriranje()
         {
             kvarService.AzurirajKvar();
         }
+
 
 
         public void IspisiJedanKvarPoId()
@@ -93,7 +106,76 @@ namespace OMS.Ispis
             Console.WriteLine("------------------------------------------");
         }
 
-       
+        
+
+
+      
+       // -------------- AKO JE KVAR U STATUSU U POPRAVCI ONDA MOZE DA SE POSTAVLJA PRIORITET PO DANU +1, PO AKCIJI*0,5 -----------------------
+          
+     public void Prioriteti()
+ {
+     bool pronadjen = false;
+
+     Console.WriteLine("Unesite ID kvara koji želite prikazati: ");
+     string unetiId = Console.ReadLine();
+
+     Console.WriteLine("--------------POJEDINAČNI KVAR--------------");
+
+     DateTime trenutnoVreme = DateTime.Now;
+
+     foreach (KvarPrioritetDTO kvpr in kvarService.KvarPrioritet())
+     {
+         if (kvpr.k.IdKv == unetiId)
+         {
+             pronadjen = true;
+
+             Console.WriteLine("------------------KVAR---------------------");
+             Console.WriteLine("{0,-25}{1,-20}{2,-15}", "IDKVAR", "VREME_KV", "STATUS");
+             Console.WriteLine("{0,-25}{1,-20}{2,-15}\n\n", kvpr.k.IdKv, kvpr.k.VrKv, kvpr.k.statusKv);
+             Console.WriteLine("ELEMENT---" + kvpr.el.NazivEl + "\t" + kvpr.el.NapNivoEl + "\n\n");
+             Console.WriteLine("PREDUZETE AKCIJE-----");
+             Console.WriteLine("{0,-25}{1,-35}", "VREMEAK", "OPIS");
+             foreach (Akcija a in kvpr.akcije)
+             {
+                 Console.WriteLine("{0,-25}{1,-35}", a.VrAk, a.opis);
+             }
+
+             // Izračunavanje proteklog vremena i ažuriranje prioriteta ako je status "U popravci"
+             DateTime vremeRegistracije = DateTime.Parse(kvpr.k.VrKv);
+             TimeSpan protekloVreme = trenutnoVreme - vremeRegistracije;
+             int brojDana = Convert.ToInt32(protekloVreme.TotalDays);
+
+             if (kvpr.k.statusKv == "U popravci")
+             {
+                 double noviPrioritet = kvpr.k.prioritet + brojDana;
+                        double noviPrioritet2 = kvpr.k.prioritet * 0.5;
+                 kvarDAO.PostaviPrioritetKvara(kvpr.k.IdKv, noviPrioritet);
+                 kvarDAO.AzurirajPrioritetZaAkciju(kvpr.k.IdKv,noviPrioritet2);
+             }
+
+             Console.WriteLine("-------------------------------------------------------------------------------------------\n\n");
+
+             break; // Prekidamo petlju nakon što pronađemo traženi kvar
+         }
+     }
+
+     if (!pronadjen)
+     {
+         Console.WriteLine("Kvar sa unetim ID-om nije pronađen.");
+     }
+
+     Console.WriteLine("------------------------------------------");
+ }
+
+
+
+
+
+
+         
+
+
+
 
 
     }

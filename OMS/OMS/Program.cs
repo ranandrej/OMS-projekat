@@ -20,13 +20,11 @@ namespace OMS
             ElektricniElementiIspis eeisp = new ElektricniElementiIspis();
 
             string answer = "";
-            while (answer != "10")
+            while (answer != "11")
+
+
             {
                 
-
-            
-            
-            
 
                 Console.WriteLine("Izaberite opciju:");
                 Console.WriteLine("1-Unos Kvara");
@@ -34,9 +32,14 @@ namespace OMS
                 Console.WriteLine("3-Unos elektricnog elementa");
                 Console.WriteLine("4-Prikaz svih elektricnih elemenata");
                 Console.WriteLine("5-Svi Kvarovi (Detaljniji opis svakog)");
+
                 Console.WriteLine("6-Azuriranje Kvara (Detaljniji opis svakog)");
                 Console.WriteLine("7-Ispis podataka o kvaru po ID-u");
                 Console.WriteLine("8-Kvarovi u datom vremenskom opsegu");
+                
+                Console.WriteLine("9-Sacuvaj kvarove u excel");
+                Console.WriteLine("10-Exit");
+                
 
 
                 answer = Console.ReadLine();
@@ -66,7 +69,21 @@ namespace OMS
                     case "7":
                         kvisp.IspisiJedanKvarPoId();
                         break;
-                    
+                    case "8":
+                        kvisp.IspisiOpseg();
+                        break;
+                    case "9":
+                        kvarDAO.SaveExcel();
+                        break;
+                    case "10":
+                        kvisp.Prioriteti();
+                        break;
+
+
+
+
+
+
 
 
 

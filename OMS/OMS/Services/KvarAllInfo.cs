@@ -28,6 +28,21 @@ namespace OMS.Services
             }
             return dtos;
         }
+
+        public List<KvarPrioritetDTO>  KvarPrioritet()
+        {
+            List<KvarPrioritetDTO> dtos= new List<KvarPrioritetDTO>();
+            foreach(Kvar k in kvarDAO.FindKvarovi())
+            {
+                KvarPrioritetDTO dto = new KvarPrioritetDTO();
+                dto.k = k;
+                dto.akcije = akcijeDAO.FindAkcijeByKvar(k.IdKv);
+                dto.el=elDAO.FindByIdEl(k.IdEl);
+                dto.k.prioritet = Convert.ToDouble(kvarDAO.PrikaziPrioritet(k.IdKv));
+                dtos.Add(dto);
+            }
+            return dtos;
+        }
         public void AzurirajKvar()
         {
             Console.WriteLine("Unesite id kvara koji hocete da azurirate:");
@@ -35,9 +50,11 @@ namespace OMS.Services
             kvarDAO.AzurirajKvarove(id);
         }
 
+
        
     
 
         
+
     }
 }
