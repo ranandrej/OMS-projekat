@@ -139,6 +139,9 @@
   <ItemGroup>
     <Compile Include="DAO\AkcijeDAO.cs" />
     <Compile Include="DAO\ElektricniElementiDAO.cs" />
+    <Compile Include="DAO\Interfejsi\IAkcije.cs" />
+    <Compile Include="DAO\Interfejsi\IElektricniElementi.cs" />
+    <Compile Include="DAO\Interfejsi\IKvar.cs" />
     <Compile Include="DAO\KvarDAO.cs" />
     <Compile Include="Data\DataBase.cs" />
     <Compile Include="DTO\KvarAkcijaDTO.cs" />

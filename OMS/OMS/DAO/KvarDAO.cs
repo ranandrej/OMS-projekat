@@ -5,12 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using OMS.Data;
 using OMS.Klase;
+using OMS.DAO.Interfejsi;
 using System.Data.SQLite;
 using ClosedXML.Excel;
 namespace OMS.DAO
 {
     //Klasa za implementaciju metoda nad kvarovima
-    public class KvarDAO
+    public class KvarDAO:IKvar
     {
         public KvarDAO()
         {

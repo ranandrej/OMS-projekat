@@ -8,12 +8,12 @@ using System.IO;
 namespace OMS.Data
 {
     //Klasa za povezivanje sa SQLite bazom
-    class DataBase
+    public class DataBase
     {
         public SQLiteConnection connection;
         public DataBase()
         {
-            connection = new SQLiteConnection("Data Source=database.sqlite3");//Kreiranje Konekcije
+            connection = new SQLiteConnection("Data Source=C:/Users/Korisnik/source/repos/OMS-projekat/OMS/OMS/bin/Debug/database.sqlite3");//Kreiranje Konekcije
             if (!File.Exists("./database.sqlite3"))
             {
                 SQLiteConnection.CreateFile("database.sqlite3");//Kreiranje DB fajla ukoliko vec ne postoji

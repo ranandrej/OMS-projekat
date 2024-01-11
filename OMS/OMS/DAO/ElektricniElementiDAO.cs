@@ -5,11 +5,11 @@ using System.Data.SQLite;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using OMS.DAO.Interfejsi;
 
 namespace OMS.DAO
 {
-    public class ElektricniElementiDAO
+    public class ElektricniElementiDAO:IElektricniElementi
     {
         public ElektricniElementiDAO() { }
 

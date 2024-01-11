@@ -22,13 +22,13 @@ namespace OMS
             string answer = "";
             while (answer != "8")
             {
+
+
+
+
+
+                Console.WriteLine("\n\n-----------MENI----------------");
                 
-
-            
-            
-            
-
-                Console.WriteLine("Izaberite opciju:");
                 Console.WriteLine("1-Unos Kvara");
                 Console.WriteLine("2-Prikaz Kvarova (Osnovne info)");
                 Console.WriteLine("3-Unos elektricnog elementa");
@@ -39,7 +39,7 @@ namespace OMS
                 Console.WriteLine("8-Izlaz");
                 Console.WriteLine("9-Sacuvaj kvarove u excel");
                 Console.WriteLine("10-Pojedinacan kvar sa prioritetom");
-                
+                Console.WriteLine("Izaberite opciju:");
 
                 answer = Console.ReadLine();
 

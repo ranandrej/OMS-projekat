@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 using OMS.Klase;
 using OMS.Data;
 using System.Data.SQLite;
+using OMS.DAO.Interfejsi;
 namespace OMS.DAO
 {
-    public class AkcijeDAO
+    public class AkcijeDAO:IAkcije
     {
         public List<Akcija> FindAkcije()
         {
