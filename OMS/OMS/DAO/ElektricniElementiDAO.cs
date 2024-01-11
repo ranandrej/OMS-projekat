@@ -1,4 +1,5 @@
-﻿using OMS.Data;
+﻿using OMS.DAO.Interfejsi;
+using OMS.Data;
 using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace OMS.DAO
 {
-    public class ElektricniElementiDAO
+    public class ElektricniElementiDAO : IElektricniElementi
     {
         public ElektricniElementiDAO() { }
 

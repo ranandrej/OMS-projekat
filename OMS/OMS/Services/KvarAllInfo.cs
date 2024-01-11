@@ -29,32 +29,32 @@ namespace OMS.Services
             return dtos;
         }
 
-        public List<KvarPrioritetDTO>  KvarPrioritet()
-        {
-            List<KvarPrioritetDTO> dtos= new List<KvarPrioritetDTO>();
-            foreach(Kvar k in kvarDAO.FindKvarovi())
-            {
-                KvarPrioritetDTO dto = new KvarPrioritetDTO();
-                dto.k = k;
-                dto.akcije = akcijeDAO.FindAkcijeByKvar(k.IdKv);
-                dto.el=elDAO.FindByIdEl(k.IdEl);
-                dto.k.prioritet = Convert.ToDouble(kvarDAO.PrikaziPrioritet(k.IdKv));
-                dtos.Add(dto);
-            }
-            return dtos;
-        }
         public void AzurirajKvar()
         {
             Console.WriteLine("Unesite id kvara koji hocete da azurirate:");
             string id = Console.ReadLine();
             kvarDAO.AzurirajKvarove(id);
         }
+        public KvarPrioritetDTO kvarSaPrioritetom(string id)
+        {
+            KvarPrioritetDTO dto = new KvarPrioritetDTO();
+            Kvar k = kvarDAO.PrikazPoId(id);
+            dto.k = k;
+            dto.akcije = akcijeDAO.FindAkcijeByKvar(k.IdKv);
+            dto.el = elDAO.FindByIdEl(k.IdEl);
+            if (String.Compare(k.statusKv, "U popravci")==0)
+            {
+                double p = kvarDAO.IzracunajPrioritetZaDane(k.IdKv) + (dto.akcije.Count() * 0.5);
+                dto.prioritet = p;
+            }
+            else
+            {
+                dto.prioritet = 0;
+            }
+            return dto;
 
 
-       
-    
-
-        
+        }
 
     }
 }

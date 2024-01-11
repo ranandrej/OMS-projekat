@@ -18,6 +18,7 @@ namespace OMS
             KvarIspis kvisp = new KvarIspis();
             ElektricniElementiDAO elementiDao = new ElektricniElementiDAO();
             ElektricniElementiIspis eeisp = new ElektricniElementiIspis();
+            
 
             string answer = "";
             while (answer != "11")
@@ -33,12 +34,18 @@ namespace OMS
                 Console.WriteLine("4-Prikaz svih elektricnih elemenata");
                 Console.WriteLine("5-Svi Kvarovi (Detaljniji opis svakog)");
 
+
                 Console.WriteLine("6-Azuriranje Kvara (Detaljniji opis svakog)");
                 Console.WriteLine("7-Ispis podataka o kvaru po ID-u");
                 Console.WriteLine("8-Kvarovi u datom vremenskom opsegu");
+
                 
                 Console.WriteLine("9-Sacuvaj kvarove u excel");
-                Console.WriteLine("10-Exit");
+                Console.WriteLine("10-Pojedinacan kvar sa prioritetom");
+            
+
+
+                Console.WriteLine("11-Exit");
                 
 
 
@@ -75,19 +82,13 @@ namespace OMS
                     case "9":
                         kvarDAO.SaveExcel();
                         break;
+                    
                     case "10":
-                        kvisp.Prioriteti();
+                        kvisp.IspisKvarPrioritet();
                         break;
 
-
-
-
-
-
-
-
-
-
+                   
+                        
 
 
 

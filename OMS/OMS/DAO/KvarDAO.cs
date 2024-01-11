@@ -8,10 +8,12 @@ using OMS.Klase;
 using System.Data.SQLite;
 using ClosedXML.Excel;
 using OMS.DTO;
+using System.Globalization;
+using OMS.DAO.Interfejsi;
 namespace OMS.DAO
 {
     //Klasa za implementaciju metoda nad kvarovima
-    public class KvarDAO
+    public class KvarDAO : IKvar
     {
         public KvarDAO()
         {
@@ -162,7 +164,7 @@ namespace OMS.DAO
 
 
 
-        public Kvar PrikazPoId(int id)
+        public Kvar PrikazPoId(string id)
         {
             Kvar kvar = new Kvar();
             DataBase db = new DataBase();
@@ -174,10 +176,11 @@ namespace OMS.DAO
             SQLiteDataReader reader = command.ExecuteReader();
             while (reader.Read())
             {
-                Kvar k = new Kvar(reader.GetString(0), reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetString(4), reader.GetInt32(5));
+                kvar = new Kvar(reader.GetString(0), reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetString(4), reader.GetInt32(5));
             }
             return kvar;
         }
+
 
 
 
@@ -339,86 +342,38 @@ namespace OMS.DAO
             Woorkbook.SaveAs("oms.xlsx");
             Console.WriteLine("Excel file exported successfully.");
         }
+
         // --------------------------------------------------------------------------------------------------------
 
-        public Kvar PrikaziPrioritet(string id)
-        {
-            Kvar kvar = new Kvar();
-            DataBase db = new DataBase();
-            string query = "select prioritet from OMS where IdKv=@id";
-            SQLiteCommand command = db.connection.CreateCommand();
-            command.CommandText = query;
-            command.Parameters.AddWithValue("@id", id);
-            db.OpenConnection();
-            SQLiteDataReader reader = command.ExecuteReader();
-            while (reader.Read())
-            {
-                kvar.IdKv = reader.GetString(0);
-                kvar.prioritet = reader.GetDouble(6);
-            }
-
-            db.CloseConnection();
-            return kvar;
-        }
+       
 
 
 
         // --------------------- POSTAVLJANJE PRIORITETA KVARA -------------------------
-          public Kvar PostaviPrioritetKvara(string idKvara, double prioritet)
-          {
-              Kvar kvar = new Kvar();
-              DataBase db = new DataBase();//Nova instance klase DataBase zbog konekcije
-
-              string query = "UPDATE OMS SET Prioritet = Prioritet + 1 WHERE IdKv=@id AND Status = 'U popravci' AND VrKv < @today";
-              SQLiteCommand command = db.connection.CreateCommand();
-              command.CommandText = query;
-              command.Parameters.AddWithValue("@id", idKvara);
-              command.Parameters.AddWithValue("@today", DateTime.Today);
-
-              
-              command.ExecuteNonQuery();
-              db.CloseConnection();
-              return kvar;
+      
 
 
-          }
+        public double IzracunajPrioritetZaDane(string id)
+        {
+            double prioritet = 0;
+            Kvar k = PrikazPoId(id);
 
+            // Dodajte proveru da li je string VrKv važeći datum pre nego što pokušate da ga parsirate
+            if (DateTime.TryParseExact(k.VrKv, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime datumKv))
+            {
+                // Ako je parsiranje uspešno, izračunajte razliku u danima
+                int brDana = (DateTime.Now - datumKv).Days;
+                prioritet += brDana;
+            }
+            else
+            {
+                // Ako nije moguće parsirati datum, obradite grešku ili preduzmite odgovarajuće korake
+                Console.WriteLine("Greška prilikom parsiranja datuma.");
+            }
 
-          public Akcija AzurirajPrioritetZaAkciju(string idKvara, double noviP)
-         {
-
-             double trenutniPrioritet=Convert.ToDouble(PrikaziPrioritet(idKvara));
-             Akcija novaAkcija= new Akcija();
-
-             double noviPrioritet=trenutniPrioritet+(Convert.ToDouble(novaAkcija.IdKv_kv)*0.5);
-             DataBase db = new DataBase();//Nova instance klase DataBase zbog konekcije
-           string query = "UPDATE OMS SET Prioritet = @noviPrioritet WHERE Status = 'U popravci' AND IDKV=@idKvara";
-                 SQLiteCommand command = db.connection.CreateCommand();
-                 command.CommandText = query;
-                 command.Parameters.AddWithValue("@noviPrioritet", noviPrioritet);
-                 command.Parameters.AddWithValue("@idKvara", idKvara);
-
-            command.ExecuteNonQuery();
-
-            db.CloseConnection();
-
-            return novaAkcija;
-
-                 }
-
-
-         }
-
+            return prioritet;
+        }
     }
-
-
-
-
-
-
-       
-
-    
-
+}
 
 
