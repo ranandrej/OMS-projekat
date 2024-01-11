@@ -47,5 +47,32 @@ namespace OMS.Ispis
             Console.WriteLine("------------------------------------------");
 
         }
+        public void IspisiOpseg()
+        {
+            List<Kvar> kvaroviOps = kvarDAO.KvaroviUOpsegu();
+            Console.WriteLine("--------------KVAROVI U UNETOM OPSEGU-----------------");
+            Console.WriteLine("{0,-25}{1,-20}{2,-15}{3,-30}", "IDKV", "VRKV", "STATUS", "Kratak opis");
+            foreach (Kvar k in kvaroviOps)
+            {
+                Console.WriteLine("{0,-25}{1,-20}{2,-15}{3,-30}",k.IdKv,k.VrKv,k.statusKv,k.opis);
+            }
+        }
+        public void Azuriranje()
+        {
+            kvarService.AzurirajKvar();
+        }
+        public void IspisKvarPrioritet()
+        {
+            Console.WriteLine("Unesite id zeljenog kvara:");
+            string id = Console.ReadLine();
+            KvarPrioritetDTO dto = kvarService.kvarSaPrioritetom(id);
+            Console.WriteLine("----------------KVAR---------------");
+            Console.WriteLine("IDKV:" + dto.k.IdKv +"\tOPIS:" + dto.k.opis +"\tELEMENT:" + dto.el.NazivEl+"\tPRIORITET:" + dto.prioritet);
+            foreach(Akcija a in dto.akcije)
+            {
+                Console.WriteLine("----------------------------------------------");
+                Console.WriteLine("OPIS AKCIJE:" + a.opis + "VREME:" + a.VrAk);
+            }
+        }
     }
 }

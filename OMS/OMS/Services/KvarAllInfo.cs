@@ -28,5 +28,31 @@ public class KvarAllInfo
             }
             return dtos;
         }
+        public void AzurirajKvar()
+        {
+            Console.WriteLine("Unesite id kvara koji hocete da azurirate:");
+            string id = Console.ReadLine();
+            kvarDAO.AzurirajKvarove(id);
+        }
+        public KvarPrioritetDTO kvarSaPrioritetom(string id)
+        {
+            KvarPrioritetDTO dto = new KvarPrioritetDTO();
+            Kvar k = kvarDAO.PrikazPoId(id);
+            dto.k = k;
+            dto.akcije = akcijeDAO.FindAkcijeByKvar(k.IdKv);
+            dto.el = elDAO.FindByIdEl(k.IdEl);
+            if (String.Compare(k.statusKv, "U popravci")==0)
+            {
+                double p = kvarDAO.IzracunajPrioritetZaDane(k.IdKv) + (dto.akcije.Count() * 0.5);
+                dto.prioritet = p;
+            }
+            else
+            {
+                dto.prioritet = 0;
+            }
+            return dto;
+
+
+        }
     }
 }
